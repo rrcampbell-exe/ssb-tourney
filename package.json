@@ -1,0 +1,22 @@
+{
+  "name": "ssb-tourney",
+  "version": "1.0.0",
+  "description": "A command line app for managing Super Smash Brothers tournaments.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrcampbell-exe/ssb-tourney.git"
+  },
+  "author": "Ryan R. Campbell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rrcampbell-exe/ssb-tourney/issues"
+  },
+  "homepage": "https://github.com/rrcampbell-exe/ssb-tourney#readme",
+  "dependencies": {
+    "inquirer": "^8.2.1"
+  }
+}
