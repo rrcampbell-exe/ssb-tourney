@@ -3,7 +3,7 @@ const inquirer = require('inquirer')
 const tourneyQuestions = [
   {
     type: 'input',
-    name: 'entrants',
+    name: 'entrantQty',
     message: 'Please enter the names of this tournament\'s competitors, separated by commas.',
     validate: entrantInput => {
       const entrantList = entrantInput.split(',')
@@ -18,16 +18,30 @@ const tourneyQuestions = [
   },
   {
     type: 'input',
-    name: 'rounds',
+    name: 'roundQty',
     message: 'How many rounds will be featured in the tournament\'s first stage?',
     validate: roundInput => {
-      // regex to test for a number
       if (/^\d+$/.test(roundInput)) {
         return true
       }
       console.log(`
       
       Please enter a whole number for the number of rounds.
+      `)
+    }
+  },
+  {
+    type: 'input',
+    name: 'matchCapQty',
+    message: 'What\'s the maximum number of combatants per match?',
+    validate: matchCapInput => {
+      // TODO: expose value of entrantList outside of initial scope
+      if (/^\d+$/.test(matchCapInput) && matchCapInput <= entrantList.length) {
+        return true
+      }
+      console.log(`
+      
+      Please make sure you've provided a whole number that is less than or equal to the number of tournament entrants.
       `)
     }
   }
@@ -61,8 +75,6 @@ console.log(`
 
           App designed by Ryan R. Campbell (rrcampbell-exe on GitHub)
 `)
-
-
 
 
 init();
