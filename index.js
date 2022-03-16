@@ -52,11 +52,12 @@ const tourneyQuestions = [
 
 // Fisher-Yates (aka Knuth) Shuffle-ish, source: https://bost.ocks.org/mike/shuffle/
 function shuffle(array) {
-  let m = array.length, t, i;
+  let m = array.length,
+    t,
+    i;
 
   // While there remain elements to shuffle…
   while (m) {
-
     // Pick a remaining element…
     i = Math.floor(Math.random() * m--);
 
@@ -73,33 +74,33 @@ const init = () => {
   return inquirer.prompt(tourneyQuestions).then((response) => {
     const entrantQty = response.entrantQty.split(",").length;
     const matchCapQty = parseInt(response.matchCapQty);
-    const entrantsArr = response.entrantQty.split(", ")
-    const roundQty = parseInt(response.roundQty)
-    // TODO: assign entrants to response.roundQty rounds of combat using random assignment
+    let entrantsArr = response.entrantQty.split(", ");
+    const roundQty = parseInt(response.roundQty);
 
     // calculate matches per round
     const matchesPerRound = Math.ceil(entrantQty / matchCapQty);
-    // console.log("This is the number of combatants:", entrantQty);
-    // console.log("This is the number of matches per round:", matchesPerRound);
-    // console.log("This is the number of rounds:", roundQty);
-    // console.log("Here's a list of combatants:", entrantsArr);
 
-    // for each round, assign combatants in entrantsArr to matches totaling the number of matchesPerRound
-
-    shuffle(entrantsArr)
+    shuffle(entrantsArr);
 
     for (let i = 0; i < roundQty; i++) {
       // shuffle order of entrants in array per round for assignment to matches
-      shuffle(entrantsArr);
+      if (entrantsArr.length === 0) {
+        entrantsArr.push(response.entrantQty.split(", "));
+        shuffle(entrantsArr)
+      }
 
-      // divide entrantsArr into new arrays whose length is capped at matchCapQty
-
-      // post these arrays as individual matches, with the total number of matches equalling roundQty * matchesPerRound
-
-      console.log("This is the order for match", i+1, ":", entrantsArr)
-      
+      let tournamentMatches = [];
+      for (let j = 0; j < matchesPerRound; j++) {
+        let combatantsInMatch = [];
+        let entrantsPerRound = entrantsArr;
+        for (let k = 0; k < matchCapQty; k++) {
+          combatantsInMatch.push(entrantsPerRound[k]);
+        }
+        entrantsPerRound.splice(0, matchCapQty);
+        tournamentMatches.push(combatantsInMatch);
+      }
+      console.log("The matches in round", i + 1, "are", tournamentMatches, ".");
     }
-
   });
 };
 
@@ -119,7 +120,7 @@ console.log(`
         ██████╔╝██║  ██║╚██████╔╝   ██║   ██║  ██║███████╗██║  ██║███████║              
         ╚═════╝ ╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝              
                                                                                         
-                             "It's tourney time."
+                             "Let's smash."
 
           App designed by Ryan R. Campbell (rrcampbell-exe on GitHub)
 `);
