@@ -85,7 +85,7 @@ const init = () => {
     for (let i = 0; i < roundQty; i++) {
       // shuffle order of entrants in array per round for assignment to matches
       if (entrantsArr.length === 0) {
-        entrantsArr.push(response.entrantQty.split(", "));
+        entrantsArr = response.entrantQty.split(", ");
         shuffle(entrantsArr)
       }
 
