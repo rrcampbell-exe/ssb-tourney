@@ -18,6 +18,9 @@ To install this app, clone it to your local device.
 ## Usage
 Once the codebase is open in your IDE, run `node index` from the command line while at the root of the app's repository.
 
+### App Demonstration
+![](app-demo.gif)
+
 ## License
 This application is covered under the MIT license.
 
