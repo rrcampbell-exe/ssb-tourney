@@ -105,7 +105,7 @@ const init = () => {
       }
 
       // display tournament rounds header
-      console.log("ROUND", i + 1);
+      console.log("~* ROUND", i + 1, "~*");
       
       // loop over tournament matches, display individual matches in console
       for (let l = 0; l < tournamentMatches.length; l++) {
