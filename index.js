@@ -1,7 +1,5 @@
 const inquirer = require("inquirer");
 
-const tourneyObj = {};
-
 const tourneyQuestions = [
   {
     type: "input",
@@ -96,10 +94,23 @@ const init = () => {
         for (let k = 0; k < matchCapQty; k++) {
           combatantsInMatch.push(entrantsPerRound[k]);
         }
+
+        // filter out undefined from combatant arrays for user friendliness
+        combatantsInMatch = combatantsInMatch.filter(element => {
+          return element !== undefined;
+        });
+
         entrantsPerRound.splice(0, matchCapQty);
         tournamentMatches.push(combatantsInMatch);
       }
-      console.log("The matches in round", i + 1, "are", tournamentMatches, ".");
+
+      // display tournament rounds header
+      console.log("ROUND", i + 1);
+      
+      // loop over tournament matches, display individual matches in console
+      for (let l = 0; l < tournamentMatches.length; l++) {
+        console.log("MATCH", l + 1, tournamentMatches[l]) ;
+      }
     }
   });
 };
